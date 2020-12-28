@@ -1,35 +1,9 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#define ROW 4
-#define COLUMN 4
-/*Create a data lnked list data structure in order to have a limitless user input length*/
+#include"mat.h"
 
-enum{FALSE,TRUE};
 
-typedef struct node{
-	char c;
-	struct node* next;
-} letter;
-typedef double mat[ROW][COLUMN];
-typedef letter * ptr;
-
-/*Define the list functions: 
-addLetter - will det the letters from the user and save them in the data structure
-letters2command - will convert the list into a char array with commands as strings
-isWhiteSpace - return TRUE(1) if the char variable is either ' ' or ' '\t'. 
-printList - will be used for debugging 
-flag - will be used for debugging*/
-
-int addLetter(ptr *, char,int);
-void list2Command(ptr *,char *);
-int isWhiteSpace(char c);
-void printList(ptr);
-void flag(int);
-void print_mat(mat );
-void read_mat(mat,double *);
-
-/************************************/
 
 int main()
 {
@@ -65,42 +39,10 @@ int main()
 }
 
 
-/************************************/
 
-void read_mat(mat matrix,double * values)
-{
-	int i,j,counter = 0;
-	/*assign the value from the values array inside the matrix. 
-	  assigning by rows*/
-	for(i = 0; i < COLUMN;i++)
-	{
-		for(j = 0; j < ROW; j++)
-		{
-			matrix[i][j] = values[counter];
-			counter++;
-		}
-	printf("\n");	
-	}
-	
-}
 
 /************************************/
 
-void print_mat(mat matrix)
-{
-	/*prints out matrix in the specified format of 7 digit field length, 2 decimal digit
-	  and a tab spacing between every column and anew lin between every row.*/
-	int i, j;
-	for(i = 0; i < ROW;i++)
-	{
-		for(j = 0; j < COLUMN; j++)
-			printf("%7.2f\t",matrix[i][j]);
-	printf("\n");	
-	}
-	return;
-}
-
-/************************************/
 
 void list2Command(ptr * head, char * command)
 {
@@ -180,34 +122,4 @@ int addLetter(ptr * lpointer,char c,int counter)
 	return	counter;
 }
 
-/************************************/
-/*ment for debugging. to verify that the list is getting every charecter*/
-void printList(ptr head)
-{
-	while(head)
-	{
-		printf("%c",head -> c);
-		head = head->next;
-	}
-	
-}
 
-/************************************/
-
-/*test a char variable. if its a whitespace - \t || space, return true*/
-int isWhiteSpace(char c)
-{
-	if(c == ' ' || c == '\t')
-		return TRUE;
-	else
-		return FALSE;
-}
-
-/************************************/
-
-/*ment for debugging, to raise a flag in a certin place in the code, helping me verify
-  that the code is working properly*/
-void flag(int iden)
-{
-	printf("flag: %d\n",iden);
-}
